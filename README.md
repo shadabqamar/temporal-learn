@@ -144,6 +144,7 @@ temporal server start-dev
 ```bash
 ./gradlew runStarter
 # Prints: ✓ Workflow started: user-onboarding-user-1773044290579
+```
 ### 4. Send Email Verification Signal
 ![UserOnboardingWorkflow](https://github.com/user-attachments/assets/6f5d6542-f02d-4671-8427-1b13931da383)
 ![ProfileSetupChildWorkflow](https://github.com/user-attachments/assets/a417b143-c3c8-4502-919a-ab610ed57803)
