@@ -124,4 +124,37 @@ temporal-user-app/
     │   └── model/
     └── test/java/com/example/temporal/
         └── UserOnboardingWorkflowTest.java  (5 tests)
+
+Steps demonstration
+### 1. Start Temporal (Terminal 1)
+```bash
+temporal server start-dev
+# UI: http://localhost:8233
+```
+
+### 2. Start Worker (Terminal 2)
+```bash
+./gradlew runWorker
+# Prints: Worker started on queue: user-onboarding-queue
+```
+
+### 3. Trigger a Workflow (Terminal 3)
+```bash
+./gradlew runStarter
+# Prints: ✓ Workflow started: user-onboarding-user-1773044290579
+<img width="1331" height="609" alt="image" src="https://github.com/user-attachments/assets/3e10fefa-8828-4e3e-ac1f-a293b8846ae8" />
+
+### 4. Send Email Verification Signal
+```bash
+WORKFLOW_ID=user-onboarding-user-XXXXXXX ./gradlew runSignal
+# Prints: ✓ Signal 'emailVerified' sent
+<img width="1336" height="553" alt="image" src="https://github.com/user-attachments/assets/effa0e70-0759-44e0-a859-70f537d55722" />
+UserOnboardingWorkflow
+<img width="1275" height="586" alt="image" src="https://github.com/user-attachments/assets/6f5d6542-f02d-4671-8427-1b13931da383" />
+ProfileSetupChildWorkflow
+<img width="1341" height="613" alt="image" src="https://github.com/user-attachments/assets/a417b143-c3c8-4502-919a-ab610ed57803" />
+
+```
+
+
 ```
