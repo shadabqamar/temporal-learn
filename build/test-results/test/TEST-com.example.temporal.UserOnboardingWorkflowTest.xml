@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.example.temporal.UserOnboardingWorkflowTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2026-03-08T16:41:13.107Z" hostname="DESKTOP-M9MCH4M" time="8.014">
+  <properties/>
+  <testcase name="happy path: full onboarding completes after emailVerified signal" classname="com.example.temporal.UserOnboardingWorkflowTest" time="7.317"/>
+  <testcase name="child workflow receives setDepartment signal and completes profile setup" classname="com.example.temporal.UserOnboardingWorkflowTest" time="0.114"/>
+  <testcase name="workflow returns AWAITING_VERIFICATION status when email verification times out" classname="com.example.temporal.UserOnboardingWorkflowTest" time="0.097"/>
+  <testcase name="getUserId() query returns correct userId at any point" classname="com.example.temporal.UserOnboardingWorkflowTest" time="0.096"/>
+  <testcase name="getStatus() returns AWAITING_VERIFICATION while waiting for email signal" classname="com.example.temporal.UserOnboardingWorkflowTest" time="0.347"/>
+  <system-out><![CDATA[22:11:19.249 [workflow-method-test-onboarding-user-001-23445276-95c6-4035-b385-5e7419eec8e6] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Onboarding started for userId=user-001
+22:11:19.451 [signal emailVerified] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Signal received: emailVerified for userId=user-001, token=token-abc-123
+22:11:19.451 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Validating user: userId=user-001, email=alice@example.com
+22:11:19.451 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - User validation passed for userId=user-001
+22:11:19.482 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Sending welcome email to Alice Smith <alice@example.com>
+22:11:19.482 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Welcome email sent to alice@example.com
+22:11:19.482 [workflow-method-test-onboarding-user-001-23445276-95c6-4035-b385-5e7419eec8e6] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Waiting for emailVerified signal (max 24h) for userId=user-001
+22:11:19.513 [workflow-method-test-onboarding-user-001-23445276-95c6-4035-b385-5e7419eec8e6] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Email verified for userId=user-001, token=token-abc-123
+22:11:19.544 [workflow-method-test-onboarding-user-001-23445276-95c6-4035-b385-5e7419eec8e6] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Child workflow started. Sending setDepartment signal.
+22:11:19.590 [workflow-method-8f2a34ad-47c5-3c86-83b3-4a1c5a5a13e4-a5b5f23a-7e69-46f6-bf71-cb05ed4bb5f3] INFO  c.e.t.w.ProfileSetupChildWorkflowImpl - Child workflow started for userId=user-001
+22:11:19.622 [signal setDepartment] INFO  c.e.t.w.ProfileSetupChildWorkflowImpl - Signal received: setDepartment=Engineering
+22:11:19.622 [workflow-method-8f2a34ad-47c5-3c86-83b3-4a1c5a5a13e4-a5b5f23a-7e69-46f6-bf71-cb05ed4bb5f3] INFO  c.e.t.w.ProfileSetupChildWorkflowImpl - Department received: Engineering. Proceeding with profile setup.
+22:11:19.622 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.ProfileActivitiesImpl - Creating profile for userId=user-001 in department=Engineering
+22:11:19.622 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.ProfileActivitiesImpl - Profile created for userId=user-001
+22:11:19.633 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.ProfileActivitiesImpl - Assigning default role to userId=user-001
+22:11:19.633 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.ProfileActivitiesImpl - Default role assigned to userId=user-001
+22:11:19.633 [workflow-method-8f2a34ad-47c5-3c86-83b3-4a1c5a5a13e4-a5b5f23a-7e69-46f6-bf71-cb05ed4bb5f3] INFO  c.e.t.w.ProfileSetupChildWorkflowImpl - Profile setup complete for userId=user-001 in department=Engineering
+22:11:19.665 [workflow-method-test-onboarding-user-001-23445276-95c6-4035-b385-5e7419eec8e6] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Child workflow completed: Profile setup complete for userId=user-001 in department=Engineering
+22:11:20.496 [workflow-method-test-onboarding-user-004-a92c45b9-9974-4656-874b-bc37174092d2] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Onboarding started for userId=user-004
+22:11:20.507 [signal emailVerified] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Signal received: emailVerified for userId=user-004, token=token-xyz
+22:11:20.507 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Validating user: userId=user-004, email=alice@example.com
+22:11:20.512 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - User validation passed for userId=user-004
+22:11:20.521 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Sending welcome email to Alice Smith <alice@example.com>
+22:11:20.521 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Welcome email sent to alice@example.com
+22:11:20.525 [workflow-method-test-onboarding-user-004-a92c45b9-9974-4656-874b-bc37174092d2] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Waiting for emailVerified signal (max 24h) for userId=user-004
+22:11:20.525 [workflow-method-test-onboarding-user-004-a92c45b9-9974-4656-874b-bc37174092d2] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Email verified for userId=user-004, token=token-xyz
+22:11:20.527 [workflow-method-test-onboarding-user-004-a92c45b9-9974-4656-874b-bc37174092d2] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Child workflow started. Sending setDepartment signal.
+22:11:20.527 [workflow-method-4193ea6a-3207-3c86-a946-79aa3387734e-9bf03619-3559-47dc-a791-1fd89fd79ae4] INFO  c.e.t.w.ProfileSetupChildWorkflowImpl - Child workflow started for userId=user-004
+22:11:20.541 [signal setDepartment] INFO  c.e.t.w.ProfileSetupChildWorkflowImpl - Signal received: setDepartment=Engineering
+22:11:20.541 [workflow-method-4193ea6a-3207-3c86-a946-79aa3387734e-9bf03619-3559-47dc-a791-1fd89fd79ae4] INFO  c.e.t.w.ProfileSetupChildWorkflowImpl - Department received: Engineering. Proceeding with profile setup.
+22:11:20.541 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.ProfileActivitiesImpl - Creating profile for userId=user-004 in department=Engineering
+22:11:20.541 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.ProfileActivitiesImpl - Profile created for userId=user-004
+22:11:20.541 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.ProfileActivitiesImpl - Assigning default role to userId=user-004
+22:11:20.541 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.ProfileActivitiesImpl - Default role assigned to userId=user-004
+22:11:20.557 [workflow-method-4193ea6a-3207-3c86-a946-79aa3387734e-9bf03619-3559-47dc-a791-1fd89fd79ae4] INFO  c.e.t.w.ProfileSetupChildWorkflowImpl - Profile setup complete for userId=user-004 in department=Engineering
+22:11:20.557 [workflow-method-test-onboarding-user-004-a92c45b9-9974-4656-874b-bc37174092d2] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Child workflow completed: Profile setup complete for userId=user-004 in department=Engineering
+22:11:20.619 [workflow-method-test-onboarding-user-005-78f0399a-63b5-477e-b26b-d142ba68985a] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Onboarding started for userId=user-005
+22:11:20.627 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Validating user: userId=user-005, email=alice@example.com
+22:11:20.627 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - User validation passed for userId=user-005
+22:11:20.636 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Sending welcome email to Alice Smith <alice@example.com>
+22:11:20.637 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Welcome email sent to alice@example.com
+22:11:20.643 [workflow-method-test-onboarding-user-005-78f0399a-63b5-477e-b26b-d142ba68985a] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Waiting for emailVerified signal (max 24h) for userId=user-005
+22:11:20.654 [workflow-method-test-onboarding-user-005-78f0399a-63b5-477e-b26b-d142ba68985a] WARN  c.e.t.w.UserOnboardingWorkflowImpl - Email verification timed out for userId=user-005
+22:11:20.711 [workflow-method-test-onboarding-user-003-e242830f-94b6-44f0-82d0-f962843488bc] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Onboarding started for userId=user-003
+22:11:20.711 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Validating user: userId=user-003, email=alice@example.com
+22:11:20.720 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - User validation passed for userId=user-003
+22:11:20.729 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Sending welcome email to Alice Smith <alice@example.com>
+22:11:20.730 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Welcome email sent to alice@example.com
+22:11:20.733 [workflow-method-test-onboarding-user-003-e242830f-94b6-44f0-82d0-f962843488bc] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Waiting for emailVerified signal (max 24h) for userId=user-003
+22:11:20.767 [signal emailVerified] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Signal received: emailVerified for userId=user-003, token=cleanup-token
+22:11:20.804 [workflow-method-test-onboarding-user-002-d98a2160-1941-48d5-bc25-3371ffe30c23] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Onboarding started for userId=user-002
+22:11:20.804 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Validating user: userId=user-002, email=alice@example.com
+22:11:20.804 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - User validation passed for userId=user-002
+22:11:20.820 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Sending welcome email to Alice Smith <alice@example.com>
+22:11:20.820 [Activity Executor taskQueue="user-onboarding-queue", namespace="default": 1] INFO  c.e.t.activity.UserActivitiesImpl - Welcome email sent to alice@example.com
+22:11:20.820 [workflow-method-test-onboarding-user-002-d98a2160-1941-48d5-bc25-3371ffe30c23] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Waiting for emailVerified signal (max 24h) for userId=user-002
+22:11:20.838 [signal emailVerified] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Signal received: emailVerified for userId=user-002, token=cleanup-token
+22:11:20.838 [workflow-method-test-onboarding-user-002-d98a2160-1941-48d5-bc25-3371ffe30c23] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Email verified for userId=user-002, token=cleanup-token
+22:11:20.838 [workflow-method-test-onboarding-user-002-d98a2160-1941-48d5-bc25-3371ffe30c23] INFO  c.e.t.w.UserOnboardingWorkflowImpl - Child workflow started. Sending setDepartment signal.
+22:11:20.856 [Workflow Executor taskQueue="user-onboarding-queue", namespace="default": 1] WARN  i.t.internal.worker.WorkflowWorker - Failure while reporting workflow progress to the server. If seen continuously the workflow might be stuck. WorkflowId=test-onboarding-user-002, RunId=d98a2160-1941-48d5-bc25-3371ffe30c23, startedEventId=20
+java.util.concurrent.CancellationException: The gRPC request was cancelled
+	at io.temporal.internal.retryer.GrpcRetryerUtils.createFinalExceptionIfNotRetryable(GrpcRetryerUtils.java:39)
+	at io.temporal.internal.retryer.GrpcSyncRetryer.retry(GrpcSyncRetryer.java:57)
+	at io.temporal.internal.retryer.GrpcRetryer.retryWithResult(GrpcRetryer.java:40)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.sendTaskCompleted(WorkflowWorker.java:616)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.handle(WorkflowWorker.java:444)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.handle(WorkflowWorker.java:343)
+	at io.temporal.internal.worker.PollTaskExecutor.lambda$process$1(PollTaskExecutor.java:76)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+22:11:20.864 [Workflow Executor taskQueue="user-onboarding-queue", namespace="default": 1] ERROR i.t.i.worker.WorkflowExecutorCache - Workflow execution closure failed with an exception
+java.lang.Error: Worker executor thread interrupted during stopping of a coroutine
+	at io.temporal.internal.sync.DeterministicRunnerImpl.close(DeterministicRunnerImpl.java:374)
+	at io.temporal.internal.sync.DeterministicRunnerImpl.close(DeterministicRunnerImpl.java:276)
+	at io.temporal.internal.sync.SyncWorkflow.close(SyncWorkflow.java:211)
+	at io.temporal.internal.replay.ReplayWorkflowExecutor.close(ReplayWorkflowExecutor.java:205)
+	at io.temporal.internal.replay.ReplayWorkflowRunTaskHandler.close(ReplayWorkflowRunTaskHandler.java:339)
+	at io.temporal.internal.worker.WorkflowExecutorCache.lambda$new$0(WorkflowExecutorCache.java:47)
+	at com.google.common.cache.LocalCache.processPendingNotifications(LocalCache.java:1849)
+	at com.google.common.cache.LocalCache$Segment.runUnlockedCleanup(LocalCache.java:3506)
+	at com.google.common.cache.LocalCache$Segment.postWriteCleanup(LocalCache.java:3482)
+	at com.google.common.cache.LocalCache$Segment.remove(LocalCache.java:3111)
+	at com.google.common.cache.LocalCache.remove(LocalCache.java:4314)
+	at com.google.common.cache.LocalCache$LocalManualCache.invalidate(LocalCache.java:4926)
+	at io.temporal.internal.worker.WorkflowExecutorCache.invalidate(WorkflowExecutorCache.java:154)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.handleReportingFailure(WorkflowWorker.java:696)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.handle(WorkflowWorker.java:510)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.handle(WorkflowWorker.java:343)
+	at io.temporal.internal.worker.PollTaskExecutor.lambda$process$1(PollTaskExecutor.java:76)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: java.lang.InterruptedException: null
+	at java.base/java.util.concurrent.FutureTask.awaitDone(FutureTask.java:418)
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:203)
+	at io.temporal.internal.sync.DeterministicRunnerImpl.close(DeterministicRunnerImpl.java:357)
+	... 19 common frames omitted
+]]></system-out>
+  <system-err><![CDATA[Mar 08, 2026 10:11:20 PM com.google.common.cache.LocalCache processPendingNotifications
+WARNING: Exception thrown by removal listener
+java.lang.Error: Worker executor thread interrupted during stopping of a coroutine
+	at io.temporal.internal.sync.DeterministicRunnerImpl.close(DeterministicRunnerImpl.java:374)
+	at io.temporal.internal.sync.DeterministicRunnerImpl.close(DeterministicRunnerImpl.java:276)
+	at io.temporal.internal.sync.SyncWorkflow.close(SyncWorkflow.java:211)
+	at io.temporal.internal.replay.ReplayWorkflowExecutor.close(ReplayWorkflowExecutor.java:205)
+	at io.temporal.internal.replay.ReplayWorkflowRunTaskHandler.close(ReplayWorkflowRunTaskHandler.java:339)
+	at io.temporal.internal.worker.WorkflowExecutorCache.lambda$new$0(WorkflowExecutorCache.java:47)
+	at com.google.common.cache.LocalCache.processPendingNotifications(LocalCache.java:1849)
+	at com.google.common.cache.LocalCache$Segment.runUnlockedCleanup(LocalCache.java:3506)
+	at com.google.common.cache.LocalCache$Segment.postWriteCleanup(LocalCache.java:3482)
+	at com.google.common.cache.LocalCache$Segment.remove(LocalCache.java:3111)
+	at com.google.common.cache.LocalCache.remove(LocalCache.java:4314)
+	at com.google.common.cache.LocalCache$LocalManualCache.invalidate(LocalCache.java:4926)
+	at io.temporal.internal.worker.WorkflowExecutorCache.invalidate(WorkflowExecutorCache.java:154)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.handleReportingFailure(WorkflowWorker.java:696)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.handle(WorkflowWorker.java:510)
+	at io.temporal.internal.worker.WorkflowWorker$TaskHandlerImpl.handle(WorkflowWorker.java:343)
+	at io.temporal.internal.worker.PollTaskExecutor.lambda$process$1(PollTaskExecutor.java:76)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at java.base/java.lang.Thread.run(Thread.java:842)
+Caused by: java.lang.InterruptedException
+	at java.base/java.util.concurrent.FutureTask.awaitDone(FutureTask.java:418)
+	at java.base/java.util.concurrent.FutureTask.get(FutureTask.java:203)
+	at io.temporal.internal.sync.DeterministicRunnerImpl.close(DeterministicRunnerImpl.java:357)
+	... 19 more
+
+]]></system-err>
+</testsuite>

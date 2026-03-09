@@ -1,0 +1,58 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Temporal Java SDK (Latest)
+    implementation 'io.temporal:temporal-sdk:1.33.0'
+
+    // Logging (Temporal uses slf4j internally)
+    implementation 'ch.qos.logback:logback-classic:1.5.1'
+
+    // Testing
+    testImplementation 'io.temporal:temporal-testing:1.33.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter:5.11.3'
+    testImplementation 'org.junit.platform:junit-platform-launcher:1.11.3'
+    testImplementation 'org.mockito:mockito-core:5.11.0'
+    testImplementation 'org.assertj:assertj-core:3.26.0'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
+
+// Convenience run tasks — one per entry point
+task runWorker(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.temporal.worker.UserOnboardingWorker'
+    description = 'Start the Temporal Worker (keep running)'
+}
+
+task runStarter(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.temporal.starter.UserOnboardingStarter'
+    description = 'Trigger a new User Onboarding workflow execution'
+}
+
+task runSignal(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    mainClass = 'com.example.temporal.starter.SendSignalStarter'
+    description = 'Send a signal to a running workflow'
+}
