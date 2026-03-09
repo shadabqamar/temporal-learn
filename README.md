@@ -146,9 +146,13 @@ temporal server start-dev
 # Prints: ✓ Workflow started: user-onboarding-user-1773044290579
 ```
 ### 4. Send Email Verification Signal
-![UserOnboardingWorkflow](https://github.com/user-attachments/assets/6f5d6542-f02d-4671-8427-1b13931da383)
-![ProfileSetupChildWorkflow](https://github.com/user-attachments/assets/a417b143-c3c8-4502-919a-ab610ed57803)
+#Completedworkflow
 ![Completedworkflow](https://github.com/user-attachments/assets/effa0e70-0759-44e0-a859-70f537d55722)
+#UserOnboardingWorkflow
+![UserOnboardingWorkflow](https://github.com/user-attachments/assets/6f5d6542-f02d-4671-8427-1b13931da383)
+#ProfileSetupChildWorkflow
+![ProfileSetupChildWorkflow](https://github.com/user-attachments/assets/a417b143-c3c8-4502-919a-ab610ed57803)
+
 ```bash
 WORKFLOW_ID=user-onboarding-user-XXXXXXX ./gradlew runSignal
 # Prints: ✓ Signal 'emailVerified' sent
