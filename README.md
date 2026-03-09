@@ -142,8 +142,7 @@ temporal server start-dev
 ```bash
 ./gradlew runStarter
 # Prints: ✓ Workflow started: user-onboarding-user-1773044290579
-<img width="1331" height="609" alt="image" src="https://github.com/user-attachments/assets/3e10fefa-8828-4e3e-ac1f-a293b8846ae8" />
-
+![Architecture Diagram](https://github.com/user-attachments/assets/3e10fefa-8828-4e3e-ac1f-a293b8846ae8)
 ### 4. Send Email Verification Signal
 ```bash
 WORKFLOW_ID=user-onboarding-user-XXXXXXX ./gradlew runSignal
