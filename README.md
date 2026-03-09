@@ -139,10 +139,11 @@ temporal server start-dev
 ```
 
 ### 3. Trigger a Workflow (Terminal 3)
+![Architecture Diagram](https://github.com/user-attachments/assets/3e10fefa-8828-4e3e-ac1f-a293b8846ae8)
+
 ```bash
 ./gradlew runStarter
 # Prints: ✓ Workflow started: user-onboarding-user-1773044290579
-![Architecture Diagram](https://github.com/user-attachments/assets/3e10fefa-8828-4e3e-ac1f-a293b8846ae8)
 ### 4. Send Email Verification Signal
 ```bash
 WORKFLOW_ID=user-onboarding-user-XXXXXXX ./gradlew runSignal
